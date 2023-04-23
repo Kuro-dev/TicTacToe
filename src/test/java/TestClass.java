@@ -2,7 +2,7 @@ import logic.ComputerPlayer;
 import logic.HumanPlayer;
 import logic.Player;
 import logic.TicTacToeGame;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestClass {
 
