@@ -4,6 +4,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TestClass {
+    TicTacToeGame game;
+
+    @BeforeEach
+    public void setup() {
+        Player human = new HumanPlayer();
+        Player computer = new ComputerPlayer();
+        game = new TicTacToeGame(human, computer);
+    }
+
+    //check if the elements are full
+    //check if the rows are the same
+    //check if the columns are the same
+    //
 
     @Test
     public void checkGameRunning() {

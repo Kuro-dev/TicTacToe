@@ -92,6 +92,25 @@ public class TicTacToeGame {
             return false;
         }
 
+        if (first == second) {
+            return first == third;
+        }
+        return false;
+    }
+
+    private boolean checkSameSymbolRow(int y) {
+        PlayerSymbol first = get(0, y);
+        PlayerSymbol second = get(1, y);
+        PlayerSymbol third = get(2, y);
+
+        if (first == null || second == null || third == null) {
+            return false;
+        }
+
+        if (first == second) {
+            return first == third;
+        }
+        return false;
     }
 
 
@@ -106,6 +125,14 @@ public class TicTacToeGame {
                 player2.doMove();
             }
             player1Turn = !player1Turn;
+        }
+    }
+
+    public void reset() {
+        for (int y = 0; y < playField.length; y++) {
+            for (int x = 0; x < playField[y].length; x++) {
+                set(x, y, null);
+            }
         }
     }
 }
