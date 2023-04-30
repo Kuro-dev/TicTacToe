@@ -23,7 +23,7 @@ public class TicTacToeGame {
         return playField[y][x];
     }
 
-    void set(int x, int y, PlayerSymbol symbol) {
+    public void set(int x, int y, PlayerSymbol symbol) {
         playField[y][x] = symbol;
     }
 
@@ -31,16 +31,66 @@ public class TicTacToeGame {
      * @return true if the game field is not full, and nobody won
      */
     public boolean checkGameRunning() {
-        //TODO simplify this later on to only check first row/column
-        for (int y = 0; y < playField.length; y++) {
-            for (int x = 0; x < playField.length; x++) {
-                checkSameSymbolRows(x, y);
+        for (int i = 0; i < playField.length; i++) {
+            boolean resultRow = checkSameSymbolRow(i);
+            if (resultRow) return false;
+            boolean resultColumn = checkSameSymbolColumn(i);
+            if (resultColumn) return false;
+        }
+        boolean diagonalWin = checkSameSymbolDiagonal();
+        if (diagonalWin) return false;
+
+        for (PlayerSymbol[] row : playField) {
+            for (PlayerSymbol item : row) {
+                if (item == null) return true;
             }
         }
-        return true;
+
+        //nobody won
+        //no field is empty
+        return false;
     }
 
-    private void checkSameSymbolRows(int x, int y) {
+    private boolean checkSameSymbolDiagonal() {
+
+        PlayerSymbol topLeft = get(0, 0);
+        PlayerSymbol middle = get(1, 1);
+        PlayerSymbol bottomRight = get(2, 2);
+
+        PlayerSymbol bottomLeft = get(0, 2);
+        PlayerSymbol topRight = get(2, 0);
+
+        if (middle == null) {
+            return false;
+        }
+
+        if (topLeft == middle) {
+            return topLeft == bottomRight;
+        }
+
+        if (bottomLeft == middle) {
+            return bottomLeft == topRight;
+        }
+
+        return false;
+
+    }
+
+    /**
+     * y|x
+     * <p>
+     * 0 * 0|0 0|1 0|2
+     * 1 * 1|0 1|1 1|2
+     * 2 * 2|0 2|1 2|2
+     */
+    private boolean checkSameSymbolColumn(int x) {
+        PlayerSymbol first = get(x, 0);
+        PlayerSymbol second = get(x, 1);
+        PlayerSymbol third = get(x, 2);
+
+        if (first == null || second == null || third == null) {
+            return false;
+        }
 
     }
 
