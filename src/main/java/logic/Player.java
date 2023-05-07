@@ -7,7 +7,7 @@ public interface Player {
     /**
      * Select field, put your symbol in there during your turn
      */
-    void doMove();
+    void doMove(PlayField playField);
     
     
 }
