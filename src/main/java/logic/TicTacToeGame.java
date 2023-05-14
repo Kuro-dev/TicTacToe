@@ -13,26 +13,33 @@ public class TicTacToeGame {
     Player player1;
     Player player2;
 
+    Player winner = null;
+
     public TicTacToeGame(Player player1, Player player2) {
 
         this.player1 = player1;
         this.player2 = player2;
     }
 
+    private boolean checkAnyPlayerHasWon() {
+        for (int i = 0; i < playField.length; i++) {
+            boolean resultRow = checkSameSymbolRow(i);
+            if (resultRow) return true;
+            boolean resultColumn = checkSameSymbolColumn(i);
+            if (resultColumn) return true;
+        }
+        boolean diagonalWin = checkSameSymbolDiagonal();
+        if (diagonalWin) return true;
+
+        return false;
+    }
 
     /**
      * @return true if the game field is not full, and nobody won
      */
     public boolean checkGameRunning() {
-        for (int i = 0; i < playField.length; i++) {
-            boolean resultRow = checkSameSymbolRow(i);
-            if (resultRow) return false;
-            boolean resultColumn = checkSameSymbolColumn(i);
-            if (resultColumn) return false;
-        }
-        boolean diagonalWin = checkSameSymbolDiagonal();
-        if (diagonalWin) return false;
-
+        if (checkAnyPlayerHasWon())
+            return false;
         //nobody won
         //return whether or not the field has space left
         return !playField.isFull();
@@ -118,11 +125,28 @@ public class TicTacToeGame {
             player1Turn = !player1Turn;
         }
         //Game is done
+
         System.out.println(playField);
-        //TODO Find out who won and print it to console
+
+        if (checkAnyPlayerHasWon()) {
+            if (!player1Turn) {
+                //player 2 would be the next to make his move, but game is already over. Means player 1 has won
+                System.out.println("player 1 has won!");
+                winner = player1;
+            } else {
+                //player 1 would be the next to make his move, but game is already over. Means player 2 has won
+                System.out.println("player 2 has won!");
+                winner = player2;
+            }
+        }
+    }
+
+    public Player getWinner() {
+        return winner;
     }
 
     public void reset() {
+        winner = null;
         FieldPosition[] positions = FieldPosition.values();
 
         for (int i = 0; i < positions.length; i++) {

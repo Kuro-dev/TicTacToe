@@ -19,14 +19,15 @@ public class PlayField {
 
     /**
      * Checks if a given position is an empty field
+     *
      * @param position the position to check
      * @return true if its free, false otherwise
      */
-    public boolean isSpotFree(FieldPosition position) {
-        return isSpotFree(position.getX(), position.getY());
+    public boolean isPositionValid(FieldPosition position) {
+        return position != null && isPositionValid(position.getX(), position.getY());
     }
 
-    private boolean isSpotFree(int x, int y) {
+    private boolean isPositionValid(int x, int y) {
         PlayerSymbol symbolAtPosition = get(x, y);
         return symbolAtPosition == null;
     }
@@ -34,7 +35,7 @@ public class PlayField {
     public boolean isFull() {
         for (int y = 0; y < field.length; y++) {
             for (int x = 0; x < field[y].length; x++) {
-                if (isSpotFree(x, y)) {
+                if (isPositionValid(x, y)) {
                     return false;
                 }
             }
