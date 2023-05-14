@@ -21,12 +21,12 @@ public class PlayfieldTests {
     @Test
     public void isSpotFree() {
         //then
-        assertTrue(field.isSpotFree(FieldPosition.TOP_LEFT));
+        assertTrue(field.isPositionValid(FieldPosition.TOP_LEFT));
 
         //given
         field.placeSymbol(PlayerSymbol.XSymbol, FieldPosition.TOP_LEFT);
         //then
-        assertFalse(field.isSpotFree(FieldPosition.TOP_LEFT));
+        assertFalse(field.isPositionValid(FieldPosition.TOP_LEFT));
     }
 
     @Test

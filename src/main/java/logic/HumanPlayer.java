@@ -26,7 +26,6 @@ public class HumanPlayer implements Player {
         String userInput = input.nextLine().trim();
         FieldPosition desiredPosition = getPositionFromInput(userInput); //nullable
 
-        //TODO handle null values for invalid input
         while (!playField.isPositionValid(desiredPosition)) {
             if (desiredPosition == null) {
                 System.out.println("Please enter a valid position (not case sensitive):");
